@@ -1,0 +1,22 @@
+{
+    "name": "taylorsuccessor/unifonic",
+    "description": "this just for php unit",
+    "authors": [
+        {
+            "name": "E.Mohammad Hashim",
+            "email": "taylorsuccesor@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "./"
+        },
+        "files": [
+            "config.php"
+        ]
+    }
+}
