@@ -43,4 +43,6 @@ while (!feof($sp)) {
 
 fclose($myfile);
 
-
+/*_____________________________________________database*/
+$mysqli = new \mysqli("localhost", "root", "", "shopify");
+$mysqli->query('insert into user(name,email,password) values ("first","email","password")');
