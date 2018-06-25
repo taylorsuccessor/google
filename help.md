@@ -28,6 +28,20 @@ preg_match_all('/[0-9]{2,}/','fdsf 12324 43 3453 t3 4 76 ', $matches);
 0xf;//15
 bindec('11') ;//3
 
+round(1.95583, 2);  // 1.96
+ceil(4.3);          // 5
+floor(9.999);       // 9
+
+/*___________________________________________________array
+sort()  - small to big
+rsort() - big to small
+asort() - by value.
+ksort() - by key.
+
+
+array_keys(['key1'=>'v','key2'=>'v']);// ['key1','key2']
+array_unique(["a" => "green", "red", "b" => "green", "blue", "red"]);//[green,red,blue]
+
 /*________________write to file
 
 $myfile = fopen("newfile.txt", "w");
