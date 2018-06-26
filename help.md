@@ -4,14 +4,8 @@ _____________________________________________________commands
 
 
 
-/*_____________________________files
-rename('tempfile', 'source'); 
 
 strlen('how much length');
-
-file_put_contents("test.txt","Hello World ");
-file_get_contents("test.txt");
-
 explode(" ", $pizza);
 substr("Hello world",10);//d
 
@@ -41,6 +35,15 @@ ksort() - by key.
 
 array_keys(['key1'=>'v','key2'=>'v']);// ['key1','key2']
 array_unique(["a" => "green", "red", "b" => "green", "blue", "red"]);//[green,red,blue]
+
+
+
+/*_____________________________files
+rename('tempfile', 'source'); 
+
+
+file_put_contents("test.txt","Hello World ");
+file_get_contents("test.txt");
 
 /*________________write to file
 
