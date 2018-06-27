@@ -26,6 +26,10 @@ round(1.95583, 2);  // 1.96
 ceil(4.3);          // 5
 floor(9.999);       // 9
 
+is_num('123') ; // false
+is_float($var)
+is_numeric($var)
+is_bool($var)
 /*___________________________________________________array
 sort()  - small to big
 rsort() - big to small
