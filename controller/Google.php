@@ -2,12 +2,12 @@
 namespace App\controller;
 
 
-class Shopify
+class Google
 {
 
 
     public   function test(){
-     echo 'hello shopify';
+     echo 'hello google';
     }
   
 

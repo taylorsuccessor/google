@@ -4,8 +4,8 @@
 
 require 'vendor/autoload.php';
 
-use App\controller\Shopify;
+use App\controller\Google;
 
-$shopify=new Shopify();
+$shopify=new Google();
 $shopify->test();
 
