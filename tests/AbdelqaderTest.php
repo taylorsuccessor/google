@@ -11,6 +11,9 @@ final class AbdelqaderTest extends TestCase
 
     public   function testHashim_1(){
 
+
+
+
         print_r($this->getFileArray(__DIR__.'/c_medium.in'));
         $abdelqader=new Abdelqader();
         $abdelqader->test();
