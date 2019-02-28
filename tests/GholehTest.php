@@ -4,9 +4,8 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 
-use App\controller\Google;
+use App\controller\Gholeh;
 
-use App\controller\Hashim;
 
 final class GholehTest extends TestCase
 {
