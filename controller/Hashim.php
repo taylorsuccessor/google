@@ -6,13 +6,13 @@ class Hashim
 {
 
 
-    public   function test(){
-        $photosArray=[
-            1=>['V',['a','b']],
-            3=>['V',['d','e']],
-            2=>['H',['a','c', 'u']],
-            0=>['H',['a','b','t','p']],
-        ];
+    public   function test($photosArray){
+//        $photosArray=[
+//            1=>['V',['a','b']],
+//            3=>['V',['d','e']],
+//            2=>['H',['a','c', 'u']],
+//            0=>['H',['a','b','t','p']],
+//        ];
 
 
 
@@ -20,7 +20,7 @@ class Hashim
         $slidesArray=$this->convertPhotosToSlides($photosArray);
 
         $similarityArray =$this-> getSimilartyArray($slidesArray);
-
+//        die(var_dump($similarityArray));
         $deletedSlides=[];
         $eachSlideWithNext =[];
 
@@ -39,20 +39,38 @@ class Hashim
 
             }
 
-            $finalArrangeOfSlides = $this->getFinalArrangeOfSlidesArray($eachSlideWithNext);
+
 
         }
+        $finalArrangeOfSlides = $this->getFinalArrangeOfSlidesArray($eachSlideWithNext);
 
+        $outPutFileContent =count($finalArrangeOfSlides)."\n";
+
+        foreach($finalArrangeOfSlides as $slideIndex){
+            $outPutFileContent .= join(' ',$slidesArray[$slideIndex]['photos'])."\n";
+        }
+
+        file_put_contents('output.txt',$outPutFileContent);
     }
 
     public function getFinalArrangeOfSlidesArray($eachSlideWithNext){
 
-        $index=0;
-        $finalArrangeOfSlides=[];
-        while(array_key_exists($index,$eachSlideWithNext)){
-            $finalArrangeOfSlides[]=$index;
-            $index=$eachSlideWithNext[$index];
+//        $index=0;
+//        foreach($eachSlideWithNext as $first=>$s){
+//            $index=$first; break;
+//        }
+
+//        $finalArrangeOfSlides=[];
+//        while(array_key_exists($index,$eachSlideWithNext)){
+//            $finalArrangeOfSlides[]=$index;
+//            $index=$eachSlideWithNext[$index];
+//        }
+        foreach($eachSlideWithNext as $previos=>$next){
+            $finalArrangeOfSlides[]=$previos;
+            $finalArrangeOfSlides[]=$next;
         }
+
+        return $finalArrangeOfSlides;
     }
 
     public function convertPhotosToSlides($photosArray){
@@ -60,21 +78,25 @@ class Hashim
 
         $slides=[];
 
-        $tempSlide=[];
+        $tempSlide=['tags'=>[],'photos'=>[]];
         $tempStart=0;
 
         foreach($photosArray as $photoIndex=>$photo){
             if($photo[0] == 'H'){
-                $slides[]=['tags'=>$photo[1],'tagsNumber'=>count($photo[1])];
+                $slides[]=['tags'=>$photo[1],'tagsNumber'=>count($photo[1]),'photos'=>[$photoIndex]];
 
             }elseif($photo[0] == 'V'){
 
-                $tempSlide=array_unique(array_merge($photo[1],$tempSlide));
-                if($tempStart == 1){
-                    $slides[]=['tags'=>$tempSlide,'tagsNumber'=>count($tempSlide)];
+                $tempSlide['tags']=array_unique(array_merge($photo[1],$tempSlide));
 
+                if($tempStart == 1){
+                    $tempSlide['photos'][]=$photoIndex;
+                    $slides[]=['tags'=>$tempSlide,'tagsNumber'=>count($tempSlide['tags']),'photos'=> $tempSlide['photos']];
+
+                    $tempSlide=['tags'=>[],'photos'=>[]];
                     $tempStart=0;
                 }else{
+                    $tempSlide['photos']=[$photoIndex];
                     $tempStart=1;
                 }
             }
@@ -146,5 +168,47 @@ class Hashim
 //    }
 //}
 
+
+
+
+    public   function testHashim_1(){
+
+//        $photosArray=[
+//            1=>['V',['a','b']],
+//            3=>['V',['d','e']],
+//            2=>['H',['a','c', 'u']],
+//            0=>['H',['a','b','t','p']],
+//        ];
+
+//        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/a_example.txt');
+//        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/b_lovely_landscapes.txt');
+        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/c_memorable_moments.txt');
+
+        $hashim=new Hashim();
+        $hashim->test($fileArray);
+
+//        $this->assertTrue(Config::get('true')) ;
+//        $this->assertEquals(1,1);
+
+    }
+    public function getFileArray($fileName){
+
+        $fileContent = file_get_contents($fileName);
+
+        $fileRows= explode("\n",$fileContent);
+        $rowsArray=[];
+        foreach($fileRows as $rowIndex=>$row){
+
+            if($rowIndex ==0 || strlen($row)<3) continue;
+
+            $oneRowArray = explode(' ',$row);
+
+            $rowsArray[] = [ $oneRowArray[0],array_slice($oneRowArray,2)];
+        }
+
+        return $rowsArray;
+
+
+    }
 }
 

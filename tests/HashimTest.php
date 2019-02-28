@@ -14,9 +14,17 @@ final class HashimTest extends TestCase
 
     public   function testHashim_1(){
 
-//        print_r($this->getFileArray(__DIR__.'/c_medium.in'));
-//        $hashim=new Hashim();
-//        $hashim->test();
+        $photosArray=[
+            1=>['V',['a','b']],
+            3=>['V',['d','e']],
+            2=>['H',['a','c', 'u']],
+            0=>['H',['a','b','t','p']],
+        ];
+
+      $fileArray = $this->getFileArray(__DIR__.'/input/a_example.txt'));
+        $hashim=new Hashim();
+        $hashim->test($fileArray);
+
 //        $this->assertTrue(Config::get('true')) ;
 //        $this->assertEquals(1,1);
 
@@ -29,9 +37,11 @@ final class HashimTest extends TestCase
         $rowsArray=[];
         foreach($fileRows as $rowIndex=>$row){
 
-            if($rowIndex ==0 || strlen($row)<2) continue;
+            if($rowIndex ==0 ) continue;
 
-            $rowsArray[] = str_split($row);
+            $oneRowArray = explode(' ',$row);
+
+            $rowsArray[] = [ $oneRowArray[0],array_slice(2,$oneRowArray)];
         }
         return $rowsArray;
 
