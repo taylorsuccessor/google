@@ -22,23 +22,38 @@ class Hashim
         $similarityArray =$this-> getSimilartyArray($slidesArray);
 
         $deletedSlides=[];
+        $eachSlideWithNext =[];
 
         foreach($similarityArray as $slideIndex =>$similarSlide){
             $tagsNumber= $slidesArray[$slideIndex]['tagsNumber'];
 
             uasort($similarSlide, function ($a , $b){
-                return  $a['maxMin'] - $b['similar']< 0;
+                return  $a['closest'] > $b['closest'];
             });
+            $i=0;
+            while(array_key_exists($i,$similarSlide)){
+                $nextSlideIndex = $similarSlide[$i]['slide'];
+                if(in_array($nextSlideIndex,$deletedSlides)){$i++; continue;}
+                $eachSlideWithNext[$slideIndex] = $nextSlideIndex;
+                $deletedSlides []= $nextSlideIndex;
 
-            foreach($similarSlide as $oneMatchSlide){
-                if($oneMatchSlide['similar'])
             }
+
+            $finalArrangeOfSlides = $this->getFinalArrangeOfSlidesArray($eachSlideWithNext);
 
         }
 
     }
 
+    public function getFinalArrangeOfSlidesArray($eachSlideWithNext){
 
+        $index=0;
+        $finalArrangeOfSlides=[];
+        while(array_key_exists($index,$eachSlideWithNext)){
+            $finalArrangeOfSlides[]=$index;
+            $index=$eachSlideWithNext[$index];
+        }
+    }
 
     public function convertPhotosToSlides($photosArray){
 
@@ -93,13 +108,13 @@ class Hashim
                 $similarNumber=count(array_intersect($currentSlide['tags'],$tempSlide['tags']));
                 if($similarNumber ==0 || $similarNumber == $currentSlide['tagsNumber'] || $similarNumber == $tempSlide['tagsNumber']  ) continue;
 
-               $minMax =floor(min($currentSlide['tagsNumber'],$tempSlide['tagsNumber'])/2);
+                $maxMin =floor(min($currentSlide['tagsNumber'],$tempSlide['tagsNumber'])/2);
                 $similarityArray[$currentSlideIndex][]=   [
                     'slide'=>$tempSlideIndex,
                     'similar'=>$similarNumber,
                     'tagsNumber'=>$tempSlide['tagsNumber'],
-                    'maxMin'=>$minMax,
-                    'closest'=>abs($minMax - )
+                    'maxMin'=>$maxMin,
+                    'closest'=> abs( $similarNumber -$maxMin)
 
                 ];
             }
@@ -108,28 +123,28 @@ class Hashim
         return $similarityArray;
     }
 
-    private function getInterstFactor($slide1, $slide2)
-    {
-        $similer = count(array_intersect($slide1,$slide2));
-        $s1Diff = (count($slide1)-$similer);
-        $s2Diff = (count($slide2)-$similer);
-
-        return min($similer, $s1Diff, $s2Diff);
-
-    }
-
-public function sortSlides($array){
-    for($j = 0; $j < count($array); $j ++) {
-        for($i = 0; $i < count($array)-1; $i ++){
-
-            if($array[$i] > $array[$i+1]) {
-                $temp = $array[$i+1];
-                $array[$i+1]=$array[$i];
-                $array[$i]=$temp;
-            }
-        }
-    }
-}
+//    private function getInterstFactor($slide1, $slide2)
+//    {
+//        $similer = count(array_intersect($slide1,$slide2));
+//        $s1Diff = (count($slide1)-$similer);
+//        $s2Diff = (count($slide2)-$similer);
+//
+//        return min($similer, $s1Diff, $s2Diff);
+//
+//    }
+//
+//public function sortSlides($array){
+//    for($j = 0; $j < count($array); $j ++) {
+//        for($i = 0; $i < count($array)-1; $i ++){
+//
+//            if($array[$i] > $array[$i+1]) {
+//                $temp = $array[$i+1];
+//                $array[$i+1]=$array[$i];
+//                $array[$i]=$temp;
+//            }
+//        }
+//    }
+//}
 
 }
 
