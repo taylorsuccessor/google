@@ -4,8 +4,8 @@
 
 require 'vendor/autoload.php';
 
-use App\controller\Hashim;
+use App\controller\Abdelqader;
 
-$hashim=new Hashim();
-$hashim->test();
+$abdelqader =new Abdelqader();
+$abdelqader->test();
 
