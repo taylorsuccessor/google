@@ -4,8 +4,8 @@
 
 require 'vendor/autoload.php';
 
-use App\controller\Google;
+use App\controller\Hashim;
 
-$shopify=new Google();
-$shopify->test();
+$hashim=new Hashim();
+$hashim->test();
 
