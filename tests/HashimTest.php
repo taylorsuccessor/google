@@ -8,20 +8,19 @@ use App\controller\Google;
 
 use App\controller\Hashim;
 
-final class GoogleTest extends TestCase
+final class HashimTest extends TestCase
 {
 
 
-    public   function testGoogle_1(){
+    public   function testHashim_1(){
 
         print_r($this->getFileArray(__DIR__.'/c_medium.in'));
-        $google=new Google();
-        $google->test();
+        $hashim=new Hashim();
+        $hashim->test();
         $this->assertTrue(Config::get('true')) ;
         $this->assertEquals(1,1);
 
     }
-
     public function getFileArray($fileName){
 
         $fileContent = file_get_contents($fileName);
