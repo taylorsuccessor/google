@@ -15,8 +15,8 @@ final class GholehTest extends TestCase
     public   function testGoogle_1(){
 
         print_r($this->getFileArray(__DIR__.'/c_medium.in'));
-        $google=new Google();
-        $google->test();
+        $Gholeh=new Gholeh();
+        $Gholeh->test();
         $this->assertTrue(Config::get('true')) ;
         $this->assertEquals(1,1);
 
