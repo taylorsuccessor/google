@@ -20,7 +20,7 @@ class Hashim
         $slidesArray=$this->convertPhotosToSlides($photosArray);
 
         $similarityArray =$this-> getSimilartyArray($slidesArray);
-//        die(var_dump($similarityArray));
+//      die(var_dump($similarityArray));
         $deletedSlides=[];
         $eachSlideWithNext =[];
 
@@ -181,8 +181,8 @@ class Hashim
 //        ];
 
 //        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/a_example.txt');
-//        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/b_lovely_landscapes.txt');
-        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/c_memorable_moments.txt');
+        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/b_lovely_landscapes.txt');
+//        $fileArray = $this->getFileArray(__DIR__.'/../tests/input/c_memorable_moments.txt');
 
         $hashim=new Hashim();
         $hashim->test($fileArray);
